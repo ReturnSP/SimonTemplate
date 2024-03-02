@@ -48,7 +48,7 @@ namespace SimonSays
             Refresh();
             //Pause for a second
             Thread.Sleep(1000);
-            //TODO: run ComputerTurn()
+            //run the pattern
             ComputerTurn();
         }
 
@@ -75,6 +75,7 @@ namespace SimonSays
             //TODO: set guess value back to 0
             guessCount = 0;
         }
+
         /// <summary>
         /// This is a generalized function for button flashing
         /// </summary>
@@ -84,7 +85,9 @@ namespace SimonSays
             Refresh();
             Thread.Sleep(250);
             Form1.buttonList[num].BackColor = Form1.backColorList[num];
-
+            Refresh();
+            Thread.Sleep(250);
+            
         }
         /// <summary>
         /// This is a generalized function for every button click event
@@ -93,22 +96,28 @@ namespace SimonSays
         {
 
             #region Button Click General Function
-            buttonTeleport();
+            //buttonTeleport();
+
             Form1.buttonList[num].BackColor = Color.Gray;
             Form1.soundList[num].Play(); //Play the sound of the button the player has clicked
 
             Refresh();
-            Thread.Sleep(Form1.pauseTime); //Pause
+            Thread.Sleep(Form1.pauseTime);
 
             Form1.buttonList[num].BackColor = Form1.backColorList[num];//Change button color back
+            Thread.Sleep(Form1.pauseTime);
+            Refresh();
+
             guessCount++;
 
             if (guessCount == Form1.patternList.Count())
             {
                 ComputerTurn();
             }
+
             #endregion
         }
+
         private void greenButton_Click(object sender, EventArgs e)
         {
             #region Green Button Click Code
@@ -123,6 +132,7 @@ namespace SimonSays
             }
             #endregion
         }
+
         private void redButton_Click(object sender, EventArgs e)
         {
             #region Red Button Click Code
@@ -130,6 +140,10 @@ namespace SimonSays
             {
                 num = 2;
                 ButtonClickFuncton();
+            }
+            else
+            {
+                GameOver();
             }
             #endregion
         }
@@ -143,6 +157,10 @@ namespace SimonSays
                 ButtonClickFuncton();
 
             }
+            else
+            {
+                GameOver();
+            }
             #endregion
         }
 
@@ -154,20 +172,25 @@ namespace SimonSays
                 num = 1;
                 ButtonClickFuncton();
             }
+            else
+            {
+                GameOver();
+            }
             #endregion
         }
 
         private void buttonTeleport() { 
         
             Random newCoords = new Random();
-            int ButtonX = newCoords.Next(0, this.Width);
-            int buttonY = newCoords.Next(0, this.Height);
+            int ButtonX;
+            int buttonY;
             //randomize button locations
             
             greenButton.Location = new Point(ButtonX = newCoords.Next(0 + greenButton.Width, this.Width- greenButton.Width), buttonY = newCoords.Next(0 + greenButton.Height, this.Height - greenButton.Height));
             redButton.Location = new Point (ButtonX = newCoords.Next(0 + redButton.Width, this.Width-redButton.Width), buttonY = newCoords.Next(0 + redButton.Height, this.Height - redButton.Height));
-            yellowButton.Location = new Point(ButtonX = newCoords.Next(0 + yellowButton.Width, this.Width), buttonY = newCoords.Next(0 + yellowButton.Height, this.Height - yellowButton.Height));
+            yellowButton.Location = new Point(ButtonX = newCoords.Next(0 + yellowButton.Width, this.Width - yellowButton.Width), buttonY = newCoords.Next(0 + yellowButton.Height, this.Height - yellowButton.Height));
             blueButton.Location = new Point(ButtonX = newCoords.Next(0 + blueButton.Width, this.Width - blueButton.Width), buttonY = newCoords.Next(0 + blueButton.Height, this.Height - blueButton.Height));
+
         }
 
         private void CountDownTimer_Tick(object sender, EventArgs e)
@@ -178,12 +201,13 @@ namespace SimonSays
             //{
             //    GameOver();
             //}
-
         }
+
         public void GameOver()
         {
-            //TODO: Play a game over sound
+            //Play a game over sound
             Form1.mistakeSound.Play();
+
             //Close this screen and open the GameOverScreen
             Form1.ChangeScreen(this, new GameOverScreen());
         }

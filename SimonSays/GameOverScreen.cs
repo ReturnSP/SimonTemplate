@@ -28,7 +28,7 @@ namespace SimonSays
         private void closeButton_Click(object sender, EventArgs e)
         {
             //Close this screen and open the MenuScreen
-            Form1.ChangeScreen(this, new MenuScreen());
+            Form1.ChangeScreen(this, new EndGameAnimation());
         }
     }
 }

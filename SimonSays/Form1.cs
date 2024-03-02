@@ -16,12 +16,6 @@ namespace SimonSays
 {
     public partial class Form1 : Form
     {
-        //TODO LIST
-        //Create timer which limits your time to remember the pattern
-        //Fix difficulty state switch feature
-        //Fix other button clicks (Core game features)
-        //Change button shape to star with hollowed out middle
-
         #region Declaring Lists
         //Creating pattern list, buttonList, and backColorList
         public static List<int> patternList = new List<int>();

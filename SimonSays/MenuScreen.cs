@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace SimonSays
 {
@@ -33,8 +34,9 @@ namespace SimonSays
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            //TODO: end the application
-            Application.Exit();
+            //end the application
+            Form1.ChangeScreen(this, new EndGameAnimation());
+            
         }
 
         private void difficultySelectButton_Click(object sender, EventArgs e)
