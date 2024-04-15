@@ -15,7 +15,7 @@ namespace SimonSays
     {
         List<Star> starList = new List<Star>();
         
-        int chance = 75;
+        int chance = 85;
 
         Random randGen = new Random();
         public EndGameAnimation()

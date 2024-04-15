@@ -16,6 +16,14 @@ namespace SimonSays
 {
     public partial class Form1 : Form
     {
+        //TO DO LIST
+        //Reduce Code when spawning stars
+        //Delete stars when the pass by the screen
+        //Make stars more controlled
+        //Button Teleportation fixes (Make sure it doesn't alter the gameplay)
+        //Get all buttons in one click event
+
+
         #region Declaring Lists
         //Creating pattern list, buttonList, and backColorList
         public static List<int> patternList = new List<int>();

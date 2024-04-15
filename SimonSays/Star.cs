@@ -20,6 +20,8 @@ namespace SimonSays
         public float size;
         public float scale;
 
+        public bool scatter = true;
+
         public static List<Star> starList = new List<Star>();
         public PointF[] starPoints = new PointF[10];
 
@@ -59,8 +61,11 @@ namespace SimonSays
         }
         private void Scatter()
         {
-            x *= -6;
-            x *= -2;
+            if (scatter == true)
+            {
+                x *= -6;
+                x *= -2;
+            }
         }
         public void Move()
         {
@@ -70,12 +75,12 @@ namespace SimonSays
             if (x > 800)
             {
                 x = -50;
-                //Scatter();
+                Scatter();
             }
             if (y > 800)
             {
                 y = -50;
-                //Scatter();
+                Scatter();
             }
             SetPoints();
         }

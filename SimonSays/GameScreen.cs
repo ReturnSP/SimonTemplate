@@ -22,14 +22,19 @@ namespace SimonSays
     public partial class GameScreen : UserControl
     {
         #region Declaring Game Screen Variables
-        //Create an int guess variable to track what part of the pattern the user is at
+        //An int guess variable to track what part of the pattern the user is at
         int guessCount;
         int num; //rand num
+
+        List<Star> starList = new List<Star>();
+
+        Random randGen = new Random();
         #endregion
 
         public GameScreen()
         {
             InitializeComponent();
+
 
         }
 
@@ -62,8 +67,6 @@ namespace SimonSays
             Form1.patternList.Add(num);
             #endregion
 
-            CountDownTimer.Start();
-
             //Create a for loop that shows each value in the pattern by lighting up approriate button
             for (int i = 0; i < Form1.patternList.Count(); i++)
             {
@@ -72,7 +75,7 @@ namespace SimonSays
                 buttonFlashing();
                 Form1.timeForTurn = Form1.patternList.Count() * Form1.timeForTurnMultiplier;
             }
-            //TODO: set guess value back to 0
+            //Set guess value back to 0
             guessCount = 0;
         }
 
@@ -80,7 +83,7 @@ namespace SimonSays
         /// This is a generalized function for button flashing
         /// </summary>
         public void buttonFlashing()
-        {
+         {
             Form1.buttonList[num].BackColor = Color.White;
             Refresh();
             Thread.Sleep(250);
@@ -92,15 +95,14 @@ namespace SimonSays
         /// <summary>
         /// This is a generalized function for every button click event
         /// </summary>
-        public void ButtonClickFuncton()
+        public void ButtonClickFunction()
         {
-
             #region Button Click General Function
             //buttonTeleport();
 
             Form1.buttonList[num].BackColor = Color.Gray;
             Form1.soundList[num].Play(); //Play the sound of the button the player has clicked
-
+            
             Refresh();
             Thread.Sleep(Form1.pauseTime);
 
@@ -114,71 +116,22 @@ namespace SimonSays
             {
                 ComputerTurn();
             }
-
             #endregion
         }
+        //private void buttonClick(object sender, EventArgs e)
+        //{
+        //    Button pressedButton = (Button)sender;
+        //    //int buttonIndex = Form1.buttonList.IndexOf(pressedButton);
 
-        private void greenButton_Click(object sender, EventArgs e)
-        {
-            #region Green Button Click Code
-            if (Form1.patternList[guessCount] == 0)
-            {
-                num = 0;
-                ButtonClickFuncton();
-            }
-            else
-            {
-                GameOver();
-            }
-            #endregion
-        }
-
-        private void redButton_Click(object sender, EventArgs e)
-        {
-            #region Red Button Click Code
-            if (Form1.patternList[guessCount] == 2)
-            {
-                num = 2;
-                ButtonClickFuncton();
-            }
-            else
-            {
-                GameOver();
-            }
-            #endregion
-        }
-
-        private void yellowButton_Click(object sender, EventArgs e)
-        {
-            #region Yellow Button Click Code
-            if (Form1.patternList[guessCount] == 3)
-            {
-                num = 3;
-                ButtonClickFuncton();
-
-            }
-            else
-            {
-                GameOver();
-            }
-            #endregion
-        }
-
-        private void blueButton_Click(object sender, EventArgs e)
-        {
-            #region Blue Button Click Code
-            if (Form1.patternList[guessCount] == 1)
-            {
-                num = 1;
-                ButtonClickFuncton();
-            }
-            else
-            {
-                GameOver();
-            }
-            #endregion
-        }
-
+        //    if (pressedButton.TabIndex == num)
+        //    {
+        //        ButtonClickFunction();
+        //    }
+        //    else
+        //    {
+        //        GameOver();
+        //    }
+        //}
         private void buttonTeleport() { 
         
             Random newCoords = new Random();
@@ -192,17 +145,6 @@ namespace SimonSays
             blueButton.Location = new Point(ButtonX = newCoords.Next(0 + blueButton.Width, this.Width - blueButton.Width), buttonY = newCoords.Next(0 + blueButton.Height, this.Height - blueButton.Height));
 
         }
-
-        private void CountDownTimer_Tick(object sender, EventArgs e)
-        {
-            //double countDown = Form1.timeForTurn * Form1.timeForTurnMultiplier;
-            //countDown--; 
-            //if (countDown <= 0)
-            //{
-            //    GameOver();
-            //}
-        }
-
         public void GameOver()
         {
             //Play a game over sound
@@ -212,9 +154,66 @@ namespace SimonSays
             Form1.ChangeScreen(this, new GameOverScreen());
         }
 
-        private void GameScreen_Paint(object sender, PaintEventArgs e)
+        private void greenButton_Click_1(object sender, EventArgs e)
         {
-             
+            #region Green Button Click Code
+            if (Form1.patternList[guessCount] == 0)
+            {
+                num = 0;
+                ButtonClickFunction();
+            }
+            else
+            {
+                GameOver();
+            }
+            #endregion
+        }
+
+        private void redButton_Click_1(object sender, EventArgs e)
+        {
+            #region Red Button Click Code
+            if (Form1.patternList[guessCount] == 2)
+            {
+                num = 2;
+                ButtonClickFunction();
+            }
+            else
+            {
+                GameOver();
+            }
+            #endregion
+        }
+
+        private void yellowButton_Click_1(object sender, EventArgs e)
+        {
+            #region Yellow Button Click Code
+            if (Form1.patternList[guessCount] == 3)
+            {
+                num = 3;
+                ButtonClickFunction();
+
+            }
+            else
+            {
+                GameOver();
+            }
+            #endregion
+        }
+
+        private void blueButton_Click_1(object sender, EventArgs e)
+        {
+
+            #region Blue Button Click Code
+            if (Form1.patternList[guessCount] == 1)
+            {
+                num = 1;
+                ButtonClickFunction();
+            }
+            else
+            {
+                GameOver();
+            }
+            #endregion
         }
     }
 }
